@@ -148,10 +148,6 @@ public class SemanticMetricDistribution implements Distribution {
         return striped.merged();
     }
 
-    private StripedTDigest create() {
-        return new StripedTDigest(1);
-    }
-
     private static class StripedTDigest {
 
         final int size;
