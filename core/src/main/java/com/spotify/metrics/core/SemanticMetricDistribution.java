@@ -190,13 +190,13 @@ public class SemanticMetricDistribution implements Distribution {
 
         public TDigest merged() {
             final TDigest merged = createDigest();
-            try {
-                for (ReentrantLock lock : locks) {
-                    lock.lock();
-                }
-                merged.add(Arrays.asList(digests));
-            } finally {
-                for (ReentrantLock lock : locks) {
+            for (int i = 0; i < size; i++) {
+                final ReentrantLock lock = locks[i];
+                lock.lock();
+                try {
+                    final TDigest digest = digests[i];
+                    merged.add(digest);
+                } finally {
                     lock.unlock();
                 }
             }
