@@ -150,10 +150,10 @@ public class SemanticMetricDistribution implements Distribution {
 
     private static class StripedTDigest {
 
-        final int size;
-        final ReentrantLock[] locks;
-        final TDigest[] digests;
-        final int mask;
+        private final int size;
+        private final ReentrantLock[] locks;
+        private final TDigest[] digests;
+        private final int mask;
 
         private StripedTDigest(int size) {
             assert isPowerOfTwo(size);
